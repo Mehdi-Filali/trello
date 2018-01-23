@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Trello</title>
+        <link rel="stylesheet" href="assets/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+        <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+        <script type="text/javascript">
+            $(document).ready(function(){
+
+              $('#add_first').click(function(){
+                var task = $('#add_todo').val();
+                var html = '<li><span>'+task+'</span></li>';
+                $('#first_card').append(html);            
+              });
+
+            $('#add_second').click(function(){
+                var task = $('#add_todo2').val();
+                var html = '<li><span>'+task+'</span></li>';
+                $('#second_card').append(html);
+
+              });
+
+            $('.submit').click(function(){            
+               $.ajax({  
+                    url:"app_trello.php",  
+                    method:"POST",  
+                    data:$('#add_todo').serialize(),  
+                    success:function(data)  
+                    {  
+                         alert(data);  
+                         $('#add_todo')[0].reset();  
+                    };  
+               });  
+            });  
+        });
+        </script>
+        <link rel="stylesheet" href="css/style.css">
+    </head>
+
+<body>
+
+	<div class="ui">
+		<div class="container">
+			<div class="logo"><img src="img/logo.png" alt="logo"></div>
+		</div>
+		<br>
+
+		<div class="lists">
+			<div class="list">
+				<header>Liste</header>
+				<ul id="first_card">
+					<li>Du texte ici... et là.</li>
+					<li>Du texte ici... et là.</li>
+					<li>Du texte ici... et là.</li>
+					<li>Du texte ici... et là.</li>
+				</ul>
+				
+				<footer>
+				    <input type="text" id="add_todo" class="submit" name="cardContent">
+				    <button id="add_first" class="submit">add card</button>
+				</footer>
+			</div>
+
+			<div class="list">
+				<header>Liste</header>
+				<ul id="second_card">
+					<li>Du texte ici... et là.</li>				
+					<li>
+						<img src="holder.js/300x150?auto=yes&bg=#ccc" alt="">
+						
+					</li>
+					<li>Du texte ici... et là.</li>
+					<li>Du texte ici... et là.</li>				
+				</ul>
+				<footer>
+				    <input type="text" id="add_todo2">
+				    <button id="add_second">add card</button>				
+				</footer>
+			</div>
+			
+			<div class="list">
+				<header>Liste</header>
+				<ul>
+					<li>Du texte ici... et là.</li>
+					<li>Du texte ici... et là.</li>
+				</ul>
+				<footer>Nouvelle tâche</footer>
+			</div>		
+			
+		</div>
+	</div>
+
+	<!-- Image placeholder -->
+	<script src='https://cdnjs.cloudflare.com/ajax/libs/holder/2.9.4/holder.min.js'></script>
+
+
+</body>
+
+</html>
